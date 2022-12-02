@@ -4,8 +4,6 @@ let score = document.getElementById("score");
 
 let bottom = 0; 
 let left = 50;
-
-var ohMyGod = new Audio ("omg.m4a");
 let enemyId = 0;
 
 var jumping = 0;
@@ -15,28 +13,29 @@ function gamePage() {
     var heroTop = parseInt(
       window.getComputedStyle(hero).getPropertyValue("top")
     );
+
+    // hero hoppar upp 5px
     if(jumping==0){
 	hero.style.top = (heroTop+5)+"px";
     }
+
     if (heroTop > 550) {
       gameOver();
 	clearInterval(gravity);
     }
+
     hero.style.top = heroTop + 3 + "px";
   }, 10);
-  var jumpSound = new Audio("bounce.m4a")
   document.addEventListener("keydown", (e) => {
     if (e.repeat) {
       return;
     } else if (e.key == " ") {
-	jumpSound.play();
       jump();
     }
 
   });
 }
   function jump() {
-    //jumpSound.play();
     jumping = 1;
     let jumpCount = 0;
     var jumpInterval = setInterval(function () {
@@ -55,6 +54,7 @@ function gamePage() {
     }, 10);
   }
 
+// START SCREEN
 function startScreen() {
   let start = document.getElementById("startScreen");
   let startBtn = document.getElementById("startBtn");
@@ -75,17 +75,17 @@ function startScreen() {
 }
 
 function gameOver() {
-  ohMyGod.play();
   let wrapper = document.getElementById("wrapper");
   let game = document.getElementById("game");
+
   game.style.display = "none";
   wrapper.style.display = "block";
   gameOverScreenBody.style.display = "block";
   gameOverText.innerText = "GAME OVER";
-  pressXToTryAgain.innerText = "Score = " + enemyId;
   quitGameBtn.innerText = "Restart"; 
+
   quitGameBtn.addEventListener("click", () => {
-    window.location.reload();
+  window.location.reload();
   });
 }
 
@@ -95,20 +95,20 @@ function createEnemy() {
     );
 
   enemyId++;
-  let score = document.getElementById("score");
   let enemy = document.createElement("div");
   enemy.classList = "enemy";
+
   let enemyUnder = document.createElement("div");
   enemyUnder.classList = "enemyUnder";
   let enemyLeft = 600;
-  let enemyBottom = Math.round(Math.round(Math.random() * 300) / 10) * 10;
+  let enemyBottom = Math.round(Math.round(Math.random() * 300) / 10) * 6;
 
   enemy.style.left = enemyLeft + "px";
   enemy.style.height = enemyBottom + "px";
   enemy.id = enemyId;
 
   enemyUnder.style.left = enemyLeft + "px";
-  enemyUnder.style.height = 420 - enemyBottom + "px";
+  enemyUnder.style.height = 400 - enemyBottom + "px";
   enemyUnder.id = "enemyUnder id is" + enemyId;
 
   let move = setInterval(() => {
@@ -121,19 +121,18 @@ function createEnemy() {
       enemy.remove();
       enemyUnder.remove();
       createEnemy();
-	score.innerText = "score = " + enemyId;
-      console.log("hero top is", heroTop, "enemy bottom is", enemyBottom);
+
 	if (heroTop < (enemyBottom - 100)) {
-		console.log("hit over")
 		gameOver();
+
 		} else if (heroTop > (enemyBottom + 100)) {
-		console.log("hit under");
 		gameOver();
 	}
     } 
-  }, 50);
+  }, 80);
   
   game.appendChild(enemy);
   game.appendChild(enemyUnder);
 }
+
 startScreen();
