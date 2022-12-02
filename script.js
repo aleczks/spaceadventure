@@ -2,11 +2,8 @@ let hero = document.getElementById("hero");
 let game = document.getElementById("game");
 let score = document.getElementById("score");
 
-let bottom = 0;
+let bottom = 0; 
 let left = 50;
-
-//var backgroundMusic = new Audio("FlappyBirdNextLevel.wav");
-//backgroundMusic.play();
 
 var ohMyGod = new Audio ("omg.m4a");
 
