@@ -82,7 +82,7 @@ function gameOver() {
   wrapper.style.display = "block";
   gameOverScreenBody.style.display = "block";
   gameOverText.innerText = "GAME OVER";
-  quitGameBtn.innerText = "Restart"; 
+  quitGameBtn.innerText = "Restart?"; 
 
   quitGameBtn.addEventListener("click", () => {
   window.location.reload();
@@ -101,7 +101,7 @@ function createEnemy() {
   let enemyUnder = document.createElement("div");
   enemyUnder.classList = "enemyUnder";
   let enemyLeft = 600;
-  let enemyBottom = Math.round(Math.round(Math.random() * 300) / 10) * 6;
+  let enemyBottom = Math.round(Math.round(Math.random() * 300) / 10) * 7;
 
   enemy.style.left = enemyLeft + "px";
   enemy.style.height = enemyBottom + "px";
@@ -125,7 +125,7 @@ function createEnemy() {
 	if (heroTop < (enemyBottom - 100)) {
 		gameOver();
 
-		} else if (heroTop > (enemyBottom + 100)) {
+		} else if (heroTop > (enemyBottom + 150)) {
 		gameOver();
 	}
     } 

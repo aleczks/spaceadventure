@@ -51,7 +51,8 @@
   #wrapper {
     height: 100vh;
     position: relative;
-    background-color: rgb(4, 4, 56);
+    background-image: url('/img/spaceBackground.jpg');
+    background-size: cover;
   }
   
   #gameOverScreenBody {
@@ -60,6 +61,8 @@
     top: 50%;
     left: 50%;
     background-image: url('/img/blackHole.jfif');
+    
+    box-shadow: inset -0px -10px 40px 25px rgb(0, 0, 6);
     text-align: center;
     margin: auto;
     position: absolute;
