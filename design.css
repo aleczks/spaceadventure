@@ -1,7 +1,7 @@
 #game {
     width: 900px;
     height: 600px;
-    background-image:url("/img/spaceBackground.jpg");
+    background-image:url("img/spaceBackground.jpg");
     background-size:cover;
     position: relative;
     margin: auto;
@@ -21,7 +21,7 @@
     left: 50px;
     border-radius:50%;
 
-    background-image:url("/img/placeholderAlien.png");
+    background-image:url("img/placeholderAlien.png");
     background-size:cover;
   }
   
@@ -51,7 +51,7 @@
   #wrapper {
     height: 100vh;
     position: relative;
-    background-image: url('/img/spaceBackground.jpg');
+    background-image: url('img/spaceBackground.jpg');
     background-size: cover;
   }
   
@@ -60,7 +60,7 @@
     height: 200px;
     top: 50%;
     left: 50%;
-    background-image: url('/img/blackHole.jfif');
+    background-image: url('img/blackHole.jfif');
     
     box-shadow: inset -0px -10px 40px 25px rgb(0, 0, 6);
     text-align: center;
@@ -87,7 +87,7 @@
   
   .start-btn {
     display: block;
-    background-image: url('/img/spaceBackground.jpg');
+    background-image: url('img/spaceBackground.jpg');
     height: 100px;
     width: 150px;
     border-radius: 9%;
