@@ -6,7 +6,6 @@ let bottom = 0;
 let left = 50;
 
 var ohMyGod = new Audio ("omg.m4a");
-
 let enemyId = 0;
 
 var jumping = 0;
@@ -89,6 +88,7 @@ function gameOver() {
     window.location.reload();
   });
 }
+
 function createEnemy() {
   var heroTop = parseInt(
       window.getComputedStyle(hero).getPropertyValue("top")
@@ -123,10 +123,10 @@ function createEnemy() {
       createEnemy();
 	score.innerText = "score = " + enemyId;
       console.log("hero top is", heroTop, "enemy bottom is", enemyBottom);
-	if (heroTop < (enemyBottom - 120)) {
+	if (heroTop < (enemyBottom - 100)) {
 		console.log("hit over")
 		gameOver();
-		} else if (heroTop > (enemyBottom + 120)) {
+		} else if (heroTop > (enemyBottom + 100)) {
 		console.log("hit under");
 		gameOver();
 	}
