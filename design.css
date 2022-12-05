@@ -6,30 +6,34 @@ body {
 }
 
 #game {
-    width: 900px;
-    height: 600px;
+    width: 60vw;
+    height: 80vh;
     background-image:url("img/spaceBackground.jpg");
     background-size:cover;
     position: relative;
     margin: auto;
+    margin-top: 10vh;
     overflow: hidden;
-    outline: 3px solid pink;
+    outline: 3px solid red;
   }
   
   #hero {
-    border: 1px solid black;
-    width: 45px;
-    height: 45px;
+    width: 90px;
+    height: 50px;
+    -webkit-box-shadow:0 0 20px pink; 
+    -moz-box-shadow: 0 0 20px pink; 
+    box-shadow:0 0 20px pink;
   
-    text-align: center;
+    
     position: absolute;
 
-    top: 50px;
-    left: 50px;
+    top: 100px;
+    left: 100px;
     border-radius:50%;
 
-    background-image:url("img/placeholderAlien.png");
-    background-size:cover;
+    background-image:url("img/ufo.jpg");
+    background-size: cover;
+    background-position: 50% 40%;
   }
   
   .enemy {

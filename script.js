@@ -100,7 +100,7 @@ function createEnemy() {
 
   let enemyUnder = document.createElement("div");
   enemyUnder.classList = "enemyUnder";
-  let enemyLeft = 600;
+  let enemyLeft = 950;
   let enemyBottom = Math.round(Math.round(Math.random() * 300) / 10) * 7;
 
   enemy.style.left = enemyLeft + "px";
@@ -112,17 +112,17 @@ function createEnemy() {
   enemyUnder.id = "enemyUnder id is" + enemyId;
 
   let move = setInterval(() => {
-    enemyLeft -= 30;
+    enemyLeft -= 30; //hur snabbt spelet rör sig framåt
     enemy.style.left = enemyLeft + "px";
     enemyUnder.style.left = enemyLeft + "px";
 
-    if (enemyLeft <= 0) {
+    if (enemyLeft <= 50) {
       clearInterval(move);
       enemy.remove();
       enemyUnder.remove();
       createEnemy();
 
-	if (heroTop < (enemyBottom - 100)) {
+	if (heroTop < (enemyBottom - 150)) {
 		gameOver();
 
 		} else if (heroTop > (enemyBottom + 150)) {
