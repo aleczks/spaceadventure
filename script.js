@@ -2,7 +2,7 @@ let hero = document.getElementById("hero");
 let game = document.getElementById("game");
 let score = document.getElementById("score");
 
-let bottom = 0; 
+let bottom = 0;
 let left = 50;
 let enemyId = 0;
 
@@ -15,13 +15,14 @@ function gamePage() {
     );
 
     // hero hoppar upp 5px
-    if(jumping==0){
-	hero.style.top = (heroTop+5)+"px";
+    if (jumping == 0) {
+      hero.style.top = (heroTop + 5) + "px";
     }
 
-    if (heroTop > 550) {
+    //game is 80vh, checking that player is inside that
+    if (heroTop > document.documentElement.clientHeight * 0.8) {
       gameOver();
-	clearInterval(gravity);
+      clearInterval(gravity);
     }
 
     hero.style.top = heroTop + 3 + "px";
@@ -35,24 +36,24 @@ function gamePage() {
 
   });
 }
-  function jump() {
-    jumping = 1;
-    let jumpCount = 0;
-    var jumpInterval = setInterval(function () {
-      var heroTop = parseInt(
-        window.getComputedStyle(hero).getPropertyValue("top")
-      );
-      if ((heroTop > 6) && (jumpCount < 15)) {
-        hero.style.top = (heroTop - 8) + "px";
-      }
-      if (jumpCount > 20) {
-        clearInterval(jumpInterval);
-        jumping = 0;
-        jumpCount = 0;
-      }
-      jumpCount++;
-    }, 10);
-  }
+function jump() {
+  jumping = 1;
+  let jumpCount = 0;
+  var jumpInterval = setInterval(function () {
+    var heroTop = parseInt(
+      window.getComputedStyle(hero).getPropertyValue("top")
+    );
+    if ((heroTop > 6) && (jumpCount < 15)) {
+      hero.style.top = (heroTop - 8) + "px";
+    }
+    if (jumpCount > 20) {
+      clearInterval(jumpInterval);
+      jumping = 0;
+      jumpCount = 0;
+    }
+    jumpCount++;
+  }, 10);
+}
 
 // START SCREEN
 function startScreen() {
@@ -70,7 +71,7 @@ function startScreen() {
     start.style.display = "none";
     game.style.display = "block";
     gamePage();
-	hero.style.top = 0 + "px";
+    hero.style.top = 0 + "px";
   });
 }
 
@@ -82,17 +83,17 @@ function gameOver() {
   wrapper.style.display = "block";
   gameOverScreenBody.style.display = "block";
   gameOverText.innerText = "GAME OVER";
-  quitGameBtn.innerText = "Restart?"; 
+  quitGameBtn.innerText = "Restart?";
 
   quitGameBtn.addEventListener("click", () => {
-  window.location.reload();
+    window.location.reload();
   });
 }
 
 function createEnemy() {
   var heroTop = parseInt(
-      window.getComputedStyle(hero).getPropertyValue("top")
-    );
+    window.getComputedStyle(hero).getPropertyValue("top")
+  );
 
   enemyId++;
   let enemy = document.createElement("div");
@@ -100,7 +101,8 @@ function createEnemy() {
 
   let enemyUnder = document.createElement("div");
   enemyUnder.classList = "enemyUnder";
-  let enemyLeft = 950;
+  //game is 60vw wide, setting left to 70% to spawn it just outside screen
+  let enemyLeft = document.documentElement.clientWidth * 0.7;
   let enemyBottom = Math.round(Math.round(Math.random() * 300) / 10) * 7;
 
   enemy.style.left = enemyLeft + "px";
@@ -112,25 +114,42 @@ function createEnemy() {
   enemyUnder.id = "enemyUnder id is" + enemyId;
 
   let move = setInterval(() => {
+    let heroTop = parseInt(
+      window.getComputedStyle(hero).getPropertyValue("top")
+    );
     enemyLeft -= 30; //hur snabbt spelet rör sig framåt
     enemy.style.left = enemyLeft + "px";
     enemyUnder.style.left = enemyLeft + "px";
 
-    if (enemyLeft <= 50) {
+    console.log("heroTop", heroTop);
+    console.log("enemyBottom", enemyBottom);
+    console.log("enemyLeft", enemyLeft);
+    if (enemyLeft > 50 && enemyLeft < 200) {
+      console.log("enemy i s close")
+
+      //checking if hero is high enough to touch top enemy, 
+      //enemyBottom is the bottom pixel of the top enemy
+      //heroTop is the top pixel of the hero
+      if (heroTop < (enemyBottom)) {
+        console.log("hero is hit from above");
+        gameOver();
+      }
+      //checking if hero is further down from the top enemy
+      //than the hole is high minus the height of the hero
+      else if (heroTop > (enemyBottom + 320)) {
+        console.log("hero is hit from below");
+        gameOver();
+      }
+    }
+    if (enemyLeft < 0) {
+
       clearInterval(move);
       enemy.remove();
       enemyUnder.remove();
       createEnemy();
-
-	if (heroTop < (enemyBottom - 150)) {
-		gameOver();
-
-		} else if (heroTop > (enemyBottom + 150)) {
-		gameOver();
-	}
-    } 
+    }
   }, 80);
-  
+
   game.appendChild(enemy);
   game.appendChild(enemyUnder);
 }
