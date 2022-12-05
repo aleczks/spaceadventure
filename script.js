@@ -103,14 +103,18 @@ function createEnemy() {
   enemyUnder.classList = "enemyUnder";
   //game is 60vw wide, setting left to 70% to spawn it just outside screen
   let enemyLeft = document.documentElement.clientWidth * 0.7;
-  let enemyBottom = Math.round(Math.round(Math.random() * 300) / 10) * 7;
+  //game takes window height into account for spawning enemies
+  let enemyBottom = Math.round(Math.round(Math.random() *
+    document.documentElement.clientHeight * 0.7) / 10) * 7;
 
   enemy.style.left = enemyLeft + "px";
   enemy.style.height = enemyBottom + "px";
   enemy.id = enemyId;
 
   enemyUnder.style.left = enemyLeft + "px";
-  enemyUnder.style.height = 400 - enemyBottom + "px";
+  let holeHeight = 400; //change height of hole here
+  enemyUnder.style.height = document.documentElement.clientHeight - holeHeight - enemyBottom + "px";
+  enemyUnder.style.bottom = "0px"; //just to make sure bottom enemy is at the bottom
   enemyUnder.id = "enemyUnder id is" + enemyId;
 
   let move = setInterval(() => {
